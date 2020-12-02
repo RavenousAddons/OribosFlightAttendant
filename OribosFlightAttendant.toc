@@ -1,0 +1,14 @@
+## Interface: 90002
+## Version: 1.0.0
+
+## Name: Oribos Flight Attendant
+## Title: |cff9eb8c9Oribos Flight Attendant
+## Notes: "You look lost! Right this way to the Oribos Flight Master."
+## Author: waldenp0nd
+
+## SavedVariables: OFA_version, OFA_seenUpdate
+
+## X-License: Public Domain
+## X-Website: https://github.com/waldenp0nd/OribosFlightAttendant
+
+Addon.lua
