@@ -8,31 +8,29 @@ local name, oribosFlightAttendant = ...
 oribosFlightAttendant.name = "Oribos Flight Attendant"
 oribosFlightAttendant.version = GetAddOnMetadata(name, "Version")
 
-local mapID = 1671
-local x = 60.6
-local y = 67.6
+local ringOfFates = 1671
+local shadowlands = 1550
+local x = 47.01
+local y = 51.13
 local inRingOfTransference = false
 
 local function attendant()
-    local uiMapID = C_Map.GetBestMapForUnit("player")
-    if uiMapID == mapID then
-        -- C_Map.SetUserWaypoint(UiMapPoint.CreateFromVector2D(uiMapID, {x = .606, y = .675}))
-        SlashCmdList["TOMTOM_WAY"](x .. " " .. y)
+    if C_Map.GetBestMapForUnit("player") == ringOfFates then
+        C_Map.SetUserWaypoint(UiMapPoint.CreateFromCoordinates(shadowlands, x / 100, y / 100, 0))
+        C_SuperTrack.SetSuperTrackedUserWaypoint(true)
         inRingOfTransference = true
     elseif inRingOfTransference == true then
-        -- C_Map.ClearUserWaypoint()
-        -- SlashCmdList["TOMTOM_WAY_RESET"]("Oribos")
+        C_Map.ClearUserWaypoint()
         inRingOfTransference = false
     end
 end
 
 local function OnEvent(self, event, arg, ...)
     if arg == name and event == "ADDON_LOADED" then
-        print("Loaded")
         if not OFA_version then
-            print("Thanks for installing |cff9eb8c9" .. oribosFlightAttendant.name .. "|r!")
+            print("Thanks for installing |cff9eb8c9" .. oribosFlightAttendant.name .. " v" .. oribosFlightAttendant.version .. "|r!")
         elseif OFA_version ~= oribosFlightAttendant.version then
-            print("Thanks for updating |cff9eb8c9" .. oribosFlightAttendant.name .. "|r!")
+            print("Thanks for updating |cff9eb8c9" .. oribosFlightAttendant.name .. "|r to |cff9eb8c9v" .. oribosFlightAttendant.version .. "|r!")
         end
         if not OFA_version or OFA_version ~= oribosFlightAttendant then
             OFA_seenUpdate = false

@@ -1,5 +1,5 @@
 ## Interface: 90002
-## Version: 1.0.0
+## Version: 1.0.1
 
 ## Name: Oribos Flight Attendant
 ## Title: |cff9eb8c9Oribos Flight Attendant
