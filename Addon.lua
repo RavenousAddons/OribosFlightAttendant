@@ -45,9 +45,9 @@ end
 local function OnEvent(self, event, arg, ...)
     if arg == name and event == "ADDON_LOADED" then
         if not OFA_version then
-            print("Thanks for installing |cff9eb8c9" .. oribosFlightAttendant.name .. " v" .. oribosFlightAttendant.version .. "|r!")
+            print("Thanks for installing |cffff866b" .. oribosFlightAttendant.name .. " v" .. oribosFlightAttendant.version .. "|r!")
         elseif OFA_version ~= oribosFlightAttendant.version then
-            print("Thanks for updating |cff9eb8c9" .. oribosFlightAttendant.name .. "|r to |cff9eb8c9v" .. oribosFlightAttendant.version .. "|r!")
+            print("Thanks for updating |cffff866b" .. oribosFlightAttendant.name .. "|r to |cffff866bv" .. oribosFlightAttendant.version .. "|r!")
         end
         if not OFA_version or OFA_version ~= oribosFlightAttendant then
             OFA_seenUpdate = false
@@ -63,7 +63,7 @@ local function OnEvent(self, event, arg, ...)
         local a, b, c = strsplit(".", oribosFlightAttendant.version)
         local d, e, f = strsplit(".", message)
         if (d > a) or (d == a and e > b) or (d == a and e == b and f > c) then
-            print("There is an update available for |cff9eb8c9" .. oribosFlightAttendant.name .. "|r!")
+            print("There is an update available for |cffff866b" .. oribosFlightAttendant.name .. "|r!")
             OFA_seenUpdate = true
         end
     elseif event == "ZONE_CHANGED" or event == "ZONE_CHANGED_INDOORS" or event == "ZONE_CHANGED_NEW_AREA" then
