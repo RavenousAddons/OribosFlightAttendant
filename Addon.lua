@@ -8,20 +8,24 @@ local name, oribosFlightAttendant = ...
 oribosFlightAttendant.name = "Oribos Flight Attendant"
 oribosFlightAttendant.version = GetAddOnMetadata(name, "Version")
 
-local ringOfFates = 1671
-local shadowlands = 1550
-local x = 47.01
-local y = 51.13
-local inRingOfTransference = false
-
 local function attendant()
-    if C_Map.GetBestMapForUnit("player") == ringOfFates then
-        C_Map.SetUserWaypoint(UiMapPoint.CreateFromCoordinates(shadowlands, x / 100, y / 100, 0))
+    if C_Map.GetBestMapForUnit("player") == 1671 then
+        waypoint = C_Map.GetUserWaypoint()
+        tracking = C_SuperTrack.IsSuperTrackingUserWaypoint()
+        if waypoint then
+            print("|cffff866b" .. oribosFlightAttendant.name ..":|r Your " .. C_Map.GetUserWaypointHyperlink() .. " has been saved.")
+        end
+        C_Map.SetUserWaypoint(UiMapPoint.CreateFromCoordinates(1550, 0.4702, 0.5116, 0))
         C_SuperTrack.SetSuperTrackedUserWaypoint(true)
-        inRingOfTransference = true
-    elseif inRingOfTransference == true then
+    elseif waypoint then
+        C_Map.SetUserWaypoint(UiMapPoint.CreateFromCoordinates(waypoint.uiMapID, waypoint.position.x, waypoint.position.y, waypoint.z))
+        if not tracking then
+            C_SuperTrack.SetSuperTrackedUserWaypoint(false)
+        end
+        waypoint = nil
+    else
         C_Map.ClearUserWaypoint()
-        inRingOfTransference = false
+        waypoint = nil
     end
 end
 
