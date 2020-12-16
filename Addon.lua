@@ -8,19 +8,32 @@ local name, oribosFlightAttendant = ...
 oribosFlightAttendant.name = "Oribos Flight Attendant"
 oribosFlightAttendant.version = GetAddOnMetadata(name, "Version")
 
+local shadowlandsMapID = 1550
+local flightMasterX = 0.4702
+local flightMasterY = 0.5116
+local waypoint = nil
+
 local function attendant()
     if C_Map.GetBestMapForUnit("player") == 1671 then
         waypoint = C_Map.GetUserWaypoint()
         tracking = C_SuperTrack.IsSuperTrackingUserWaypoint()
         if waypoint then
-            print("|cffff866b" .. oribosFlightAttendant.name ..":|r Your " .. C_Map.GetUserWaypointHyperlink() .. " has been saved.")
+            if waypoint.uiMapID == shadowlandsMapID and string.format("%.4f", waypoint.position.x) == string.format("%.4f", flightMasterX) and string.format("%.4f", waypoint.position.y) == string.format("%.4f", flightMasterY) then
+                -- Do nothing, it's ours
+            else
+                print("|cffff866b" .. oribosFlightAttendant.name ..":|r Your " .. C_Map.GetUserWaypointHyperlink() .. " has been saved.")
+            end
         end
-        C_Map.SetUserWaypoint(UiMapPoint.CreateFromCoordinates(1550, 0.4702, 0.5116, 0))
+        C_Map.SetUserWaypoint(UiMapPoint.CreateFromCoordinates(shadowlandsMapID, 0.4702, 0.5116, 0))
         C_SuperTrack.SetSuperTrackedUserWaypoint(true)
     elseif waypoint then
-        C_Map.SetUserWaypoint(UiMapPoint.CreateFromCoordinates(waypoint.uiMapID, waypoint.position.x, waypoint.position.y, waypoint.z))
-        if not tracking then
-            C_SuperTrack.SetSuperTrackedUserWaypoint(false)
+        if waypoint.uiMapID == shadowlandsMapID and string.format("%.4f", waypoint.position.x) == string.format("%.4f", flightMasterX) and string.format("%.4f", waypoint.position.y) == string.format("%.4f", flightMasterY) then
+            C_Map.ClearUserWaypoint()
+        else
+            C_Map.SetUserWaypoint(UiMapPoint.CreateFromCoordinates(waypoint.uiMapID, waypoint.position.x, waypoint.position.y, waypoint.z))
+            if not tracking then
+                C_SuperTrack.SetSuperTrackedUserWaypoint(false)
+            end
         end
         waypoint = nil
     else
