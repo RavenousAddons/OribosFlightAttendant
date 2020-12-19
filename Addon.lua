@@ -8,37 +8,34 @@ local name, oribosFlightAttendant = ...
 oribosFlightAttendant.name = "Oribos Flight Attendant"
 oribosFlightAttendant.version = GetAddOnMetadata(name, "Version")
 
+local ringOfTransferenceMapID = 1671
 local shadowlandsMapID = 1550
 local flightMasterX = 0.4702
 local flightMasterY = 0.5116
-local waypoint = nil
+
+local playerWaypoint = nil
+local playerWaypointTracking = false
 
 local function attendant()
-    if C_Map.GetBestMapForUnit("player") == 1671 then
-        waypoint = C_Map.GetUserWaypoint()
-        tracking = C_SuperTrack.IsSuperTrackingUserWaypoint()
+    local waypoint = C_Map.GetUserWaypoint()
+    if C_Map.GetBestMapForUnit("player") == ringOfTransferenceMapID then
         if waypoint then
             if waypoint.uiMapID == shadowlandsMapID and string.format("%.4f", waypoint.position.x) == string.format("%.4f", flightMasterX) and string.format("%.4f", waypoint.position.y) == string.format("%.4f", flightMasterY) then
                 -- Do nothing, it's ours
             else
+                playerWaypoint = waypoint
+                playerWaypointTracking = C_SuperTrack.IsSuperTrackingUserWaypoint()
                 print("|cffff866b" .. oribosFlightAttendant.name ..":|r Your " .. C_Map.GetUserWaypointHyperlink() .. " has been saved.")
             end
         end
-        C_Map.SetUserWaypoint(UiMapPoint.CreateFromCoordinates(shadowlandsMapID, 0.4702, 0.5116, 0))
+        C_Map.SetUserWaypoint(UiMapPoint.CreateFromCoordinates(shadowlandsMapID, flightMasterX, flightMasterY, 0))
         C_SuperTrack.SetSuperTrackedUserWaypoint(true)
-    elseif waypoint then
-        if waypoint.uiMapID == shadowlandsMapID and string.format("%.4f", waypoint.position.x) == string.format("%.4f", flightMasterX) and string.format("%.4f", waypoint.position.y) == string.format("%.4f", flightMasterY) then
-            C_Map.ClearUserWaypoint()
-        else
-            C_Map.SetUserWaypoint(UiMapPoint.CreateFromCoordinates(waypoint.uiMapID, waypoint.position.x, waypoint.position.y, waypoint.z))
-            if not tracking then
-                C_SuperTrack.SetSuperTrackedUserWaypoint(false)
-            end
-        end
-        waypoint = nil
-    else
+    elseif playerWaypoint then
+        C_Map.SetUserWaypoint(UiMapPoint.CreateFromCoordinates(playerWaypoint.uiMapID, playerWaypoint.position.x, playerWaypoint.position.y, playerWaypoint.z))
+        C_SuperTrack.SetSuperTrackedUserWaypoint(playerWaypointTracking)
+        playerWaypoint = nil
+    elseif waypoint.uiMapID == shadowlandsMapID and string.format("%.4f", waypoint.position.x) == string.format("%.4f", flightMasterX) and string.format("%.4f", waypoint.position.y) == string.format("%.4f", flightMasterY) then
         C_Map.ClearUserWaypoint()
-        waypoint = nil
     end
 end
 
@@ -55,9 +52,13 @@ local function OnEvent(self, event, arg, ...)
         OFA_version = oribosFlightAttendant.version
         attendant()
         C_ChatInfo.RegisterAddonMessagePrefix(name)
-        C_ChatInfo.SendAddonMessage(name, OFA_version, "GUILD")
+        C_ChatInfo.SendAddonMessage(name, OFA_version, "YELL")
         C_ChatInfo.SendAddonMessage(name, OFA_version, "PARTY")
         C_ChatInfo.SendAddonMessage(name, OFA_version, "RAID")
+        local guild, _, _, _ = GetGuildInfo("player")
+        if guild then
+            C_ChatInfo.SendAddonMessage(name, OFA_version, "GUILD")
+        end
     elseif arg == name and event == "CHAT_MSG_ADDON" and not OFA_seenUpdate then
         local message, _ = ...
         local a, b, c = strsplit(".", oribosFlightAttendant.version)
