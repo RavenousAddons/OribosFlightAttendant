@@ -34,8 +34,10 @@ local function attendant()
         C_Map.SetUserWaypoint(UiMapPoint.CreateFromCoordinates(playerWaypoint.uiMapID, playerWaypoint.position.x, playerWaypoint.position.y, playerWaypoint.z))
         C_SuperTrack.SetSuperTrackedUserWaypoint(playerWaypointTracking)
         playerWaypoint = nil
-    elseif waypoint.uiMapID == shadowlandsMapID and string.format("%.4f", waypoint.position.x) == string.format("%.4f", flightMasterX) and string.format("%.4f", waypoint.position.y) == string.format("%.4f", flightMasterY) then
-        C_Map.ClearUserWaypoint()
+    elseif waypoint then
+        if waypoint.uiMapID == shadowlandsMapID and string.format("%.4f", waypoint.position.x) == string.format("%.4f", flightMasterX) and string.format("%.4f", waypoint.position.y) == string.format("%.4f", flightMasterY) then
+            C_Map.ClearUserWaypoint()
+        end
     end
 end
 
