@@ -1,8 +1,8 @@
 ## Interface: 90002
-## Version: 1.1.5
+## Version: 1.1.6
 
 ## Name: Oribos Flight Attendant
-## Title: |cffff866bOribos Flight Attendant
+## Title: Oribos |cffff866bFlight Attendant|r
 ## Notes: "You look lost! Right this way to the Oribos Flight Master."
 ## Author: waldenp0nd
 

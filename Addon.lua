@@ -6,12 +6,6 @@
 -- License: Public Domain
 ---
 local name, oribosFlightAttendant = ...
-oribosFlightAttendant.name = "Oribos Flight Attendant"
-oribosFlightAttendant.version = GetAddOnMetadata(name, "Version")
-oribosFlightAttendant.github = "https://github.com/waldenp0nd/OribosFlightAttendant"
-oribosFlightAttendant.curseforge = "https://www.curseforge.com/wow/addons/oribos-flight-attendant"
-oribosFlightAttendant.wowinterface = "https://www.wowinterface.com/downloads/info25812-OribosFlightAttendant.html"
-oribosFlightAttendant.discord = "https://discord.gg/dNfqnRf2fq"
 
 local defaults = {
     LOCALE = "enUS"
