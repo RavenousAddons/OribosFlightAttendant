@@ -1,12 +1,23 @@
 ---
 -- Oribos Flight Attendant
+--   Simply adds a native waypoint to your map when you’re in the
+--   Ring of Transference that points to the Flight Master.
 -- Author: waldenp0nd
 -- License: Public Domain
--- https://github.com/waldenp0nd/OribosFlightAttendant
 ---
 local name, oribosFlightAttendant = ...
 oribosFlightAttendant.name = "Oribos Flight Attendant"
 oribosFlightAttendant.version = GetAddOnMetadata(name, "Version")
+oribosFlightAttendant.github = "https://github.com/waldenp0nd/OribosFlightAttendant"
+oribosFlightAttendant.curseforge = "https://www.curseforge.com/wow/addons/oribos-flight-attendant"
+oribosFlightAttendant.wowinterface = "https://www.wowinterface.com/downloads/info25812-OribosFlightAttendant.html"
+oribosFlightAttendant.discord = "https://discord.gg/dNfqnRf2fq"
+
+local defaults = {
+    LOCALE = "enUS"
+}
+
+local guild, _, _, _ = GetGuildInfo("player")
 
 local ringOfTransferenceMapID = 1671
 local shadowlandsMapID = 1550
@@ -15,6 +26,11 @@ local flightMasterY = 0.5116
 
 local playerWaypoint = nil
 local playerWaypointTracking = false
+
+local function prettyPrint(message)
+    local prefix = "|cffff866b" .. oribosFlightAttendant.name ..":|r "
+    DEFAULT_CHAT_FRAME:AddMessage(prefix .. message)
+end
 
 local function attendant()
     local waypoint = C_Map.GetUserWaypoint()
@@ -25,7 +41,7 @@ local function attendant()
             else
                 playerWaypoint = waypoint
                 playerWaypointTracking = C_SuperTrack.IsSuperTrackingUserWaypoint()
-                print("|cffff866b" .. oribosFlightAttendant.name ..":|r Your " .. C_Map.GetUserWaypointHyperlink() .. " has been saved.")
+                prettyPrint("Your " .. C_Map.GetUserWaypointHyperlink() .. " has been saved.")
             end
         end
         C_Map.SetUserWaypoint(UiMapPoint.CreateFromCoordinates(shadowlandsMapID, flightMasterX, flightMasterY, 0))
@@ -41,35 +57,47 @@ local function attendant()
     end
 end
 
+local function sendVersionData()
+    C_ChatInfo.SendAddonMessage(name, OFA_version, "YELL")
+    C_ChatInfo.SendAddonMessage(name, OFA_version, "PARTY")
+    C_ChatInfo.SendAddonMessage(name, OFA_version, "RAID")
+    if guild then
+        C_ChatInfo.SendAddonMessage(name, OFA_version, "GUILD")
+    end
+end
+
 local function OnEvent(self, event, arg, ...)
-    if arg == name and event == "ADDON_LOADED" then
-        if not OFA_version then
-            print("Thanks for installing |cffff866b" .. oribosFlightAttendant.name .. " v" .. oribosFlightAttendant.version .. "|r!")
-        elseif OFA_version ~= oribosFlightAttendant.version then
-            print("Thanks for updating |cffff866b" .. oribosFlightAttendant.name .. "|r to |cffff866bv" .. oribosFlightAttendant.version .. "|r!")
+    if arg == name then
+        if event == "ADDON_LOADED" then
+            oribosFlightAttendant.locale = GetLocale()
+            if not oribosFlightAttendant.locales[oribosFlightAttendant.locale] then
+                oribosFlightAttendant.locale = defaults.LOCALE
+            end
+            if not OFA_version then
+                prettyPrint(string.format(oribosFlightAttendant.locales[oribosFlightAttendant.locale].load.install, oribosFlightAttendant.name))
+            elseif OFA_version ~= oribosFlightAttendant.version then
+                prettyPrint(string.format(oribosFlightAttendant.locales[oribosFlightAttendant.locale].load.update, oribosFlightAttendant.version))
+            end
+            if not OFA_version or OFA_version ~= oribosFlightAttendant.version then
+                print(string.format(oribosFlightAttendant.locales[oribosFlightAttendant.locale].help[1], oribosFlightAttendant.name))
+                print(string.format(oribosFlightAttendant.locales[oribosFlightAttendant.locale].help[2], oribosFlightAttendant.name))
+                print(string.format(oribosFlightAttendant.locales[oribosFlightAttendant.locale].help[3], oribosFlightAttendant.discord))
+                OFA_seenUpdate = false
+            end
+            OFA_version = oribosFlightAttendant.version
+            C_ChatInfo.RegisterAddonMessagePrefix(name)
+            sendVersionData()
+        elseif event == "CHAT_MSG_ADDON" and OFA_seenUpdate == false then
+            local message, _ = ...
+            local a, b, c = strsplit(".", oribosFlightAttendant.version)
+            local d, e, f = strsplit(".", message)
+            if (d > a) or (d == a and e > b) or (d == a and e == b and f > c) then
+                prettyPrint(string.format(oribosFlightAttendant.locales[oribosFlightAttendant.locale].load.outofdate, oribosFlightAttendant.name))
+                OFA_seenUpdate = true
+            end
         end
-        if not OFA_version or OFA_version ~= oribosFlightAttendant then
-            OFA_seenUpdate = false
-        end
-        OFA_version = oribosFlightAttendant.version
-        attendant()
-        C_ChatInfo.RegisterAddonMessagePrefix(name)
-        C_ChatInfo.SendAddonMessage(name, OFA_version, "YELL")
-        C_ChatInfo.SendAddonMessage(name, OFA_version, "PARTY")
-        C_ChatInfo.SendAddonMessage(name, OFA_version, "RAID")
-        local guild, _, _, _ = GetGuildInfo("player")
-        if guild then
-            C_ChatInfo.SendAddonMessage(name, OFA_version, "GUILD")
-        end
-    elseif arg == name and event == "CHAT_MSG_ADDON" and not OFA_seenUpdate then
-        local message, _ = ...
-        local a, b, c = strsplit(".", oribosFlightAttendant.version)
-        local d, e, f = strsplit(".", message)
-        if (d > a) or (d == a and e > b) or (d == a and e == b and f > c) then
-            print("There is an update available for |cffff866b" .. oribosFlightAttendant.name .. "|r!")
-            OFA_seenUpdate = true
-        end
-    elseif event == "ZONE_CHANGED" or event == "ZONE_CHANGED_INDOORS" or event == "ZONE_CHANGED_NEW_AREA" then
+    end
+    if event == "ZONE_CHANGED" or event == "ZONE_CHANGED_INDOORS" or event == "ZONE_CHANGED_NEW_AREA" then
         attendant()
     end
 end
