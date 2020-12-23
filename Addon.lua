@@ -52,16 +52,16 @@ end
 local function sendVersionData()
     local inInstance, _ = IsInInstance()
     if inInstance then
-        C_ChatInfo.SendAddonMessage(name, RAV_version, "INSTANCE_CHAT")
+        C_ChatInfo.SendAddonMessage(name, OFA_version, "INSTANCE_CHAT")
     elseif IsInGroup() then
         if GetNumGroupMembers() > 5 then
-            C_ChatInfo.SendAddonMessage(name, RAV_version, "RAID")
+            C_ChatInfo.SendAddonMessage(name, OFA_version, "RAID")
         end
-        C_ChatInfo.SendAddonMessage(name, RAV_version, "PARTY")
+        C_ChatInfo.SendAddonMessage(name, OFA_version, "PARTY")
     end
     local guildName, _, _, _ = GetGuildInfo("player")
     if guildName then
-        C_ChatInfo.SendAddonMessage(name, RAV_version, "GUILD")
+        C_ChatInfo.SendAddonMessage(name, OFA_version, "GUILD")
     end
 end
 
