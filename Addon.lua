@@ -11,8 +11,6 @@ local defaults = {
     LOCALE = "enUS"
 }
 
-local guild, _, _, _ = GetGuildInfo("player")
-
 local ringOfTransferenceMapID = 1671
 local shadowlandsMapID = 1550
 local flightMasterX = 0.4702
@@ -52,11 +50,18 @@ local function attendant()
 end
 
 local function sendVersionData()
-    C_ChatInfo.SendAddonMessage(name, OFA_version, "YELL")
-    C_ChatInfo.SendAddonMessage(name, OFA_version, "PARTY")
-    C_ChatInfo.SendAddonMessage(name, OFA_version, "RAID")
-    if guild then
-        C_ChatInfo.SendAddonMessage(name, OFA_version, "GUILD")
+    local inInstance, _ = IsInInstance()
+    if inInstance then
+        C_ChatInfo.SendAddonMessage(name, RAV_version, "INSTANCE_CHAT")
+    elseif IsInGroup() then
+        if GetNumGroupMembers() > 5 then
+            C_ChatInfo.SendAddonMessage(name, RAV_version, "RAID")
+        end
+        C_ChatInfo.SendAddonMessage(name, RAV_version, "PARTY")
+    end
+    local guildName, _, _, _ = GetGuildInfo("player")
+    if guildName then
+        C_ChatInfo.SendAddonMessage(name, RAV_version, "GUILD")
     end
 end
 
