@@ -1,5 +1,5 @@
 ## Interface: 90002
-## Version: 1.1.7
+## Version: 1.1.8
 
 ## Name: Oribos Flight Attendant
 ## Title: Oribos |cffff866bFlight Attendant|r
@@ -7,6 +7,7 @@
 ## Author: waldenp0nd
 
 ## SavedVariables: OFA_version, OFA_seenUpdate
+## SavedVariablesPerCharacter: OFA_playerWaypoint, OFA_playerWaypointTracking
 
 ## X-License: Public Domain
 ## X-Website: https://github.com/waldenp0nd/OribosFlightAttendant

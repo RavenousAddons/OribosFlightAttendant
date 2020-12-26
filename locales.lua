@@ -18,6 +18,7 @@ oribosFlightAttendant.locales = {
             ["outofdate"] = "There is an update available for |cff" .. oribosFlightAttendant.color .. "%s|r! Please go to GitHub, WoWInterface, or Curse to download.", -- oribosFlightAttendant.name
             ["install"] = "Thanks for installing |cff" .. oribosFlightAttendant.color .. "%s|r!", -- oribosFlightAttendant.name
             ["update"] = "Thanks for updating to |cff" .. oribosFlightAttendant.color .. "v%s|r!" -- oribosFlightAttendant.version
-        }
+        },
+        ["saved"] = "Your %s has been saved." -- C_Map.GetUserWaypointHyperlink()
     }
 }

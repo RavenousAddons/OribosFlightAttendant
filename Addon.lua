@@ -16,8 +16,8 @@ local shadowlandsMapID = 1550
 local flightMasterX = 0.4702
 local flightMasterY = 0.5116
 
-local playerWaypoint = nil
-local playerWaypointTracking = false
+OFA_playerWaypoint = OFA_playerWaypoint ~= nil and OFA_playerWaypoint or nil
+OFA_playerWaypointTracking = OFA_playerWaypointTracking ~= nil and OFA_playerWaypointTracking or false
 
 local function prettyPrint(message)
     local prefix = "|cffff866b" .. oribosFlightAttendant.name ..":|r "
@@ -31,17 +31,17 @@ local function attendant()
             if waypoint.uiMapID == shadowlandsMapID and string.format("%.4f", waypoint.position.x) == string.format("%.4f", flightMasterX) and string.format("%.4f", waypoint.position.y) == string.format("%.4f", flightMasterY) then
                 -- Do nothing, it's ours
             else
-                playerWaypoint = waypoint
-                playerWaypointTracking = C_SuperTrack.IsSuperTrackingUserWaypoint()
-                prettyPrint("Your " .. C_Map.GetUserWaypointHyperlink() .. " has been saved.")
+                OFA_playerWaypoint = waypoint
+                OFA_playerWaypointTracking = C_SuperTrack.IsSuperTrackingUserWaypoint()
+                prettyPrint(string.format(oribosFlightAttendant.locales[oribosFlightAttendant.locale].saved, C_Map.GetUserWaypointHyperlink()))
             end
         end
         C_Map.SetUserWaypoint(UiMapPoint.CreateFromCoordinates(shadowlandsMapID, flightMasterX, flightMasterY, 0))
         C_SuperTrack.SetSuperTrackedUserWaypoint(true)
-    elseif playerWaypoint then
-        C_Map.SetUserWaypoint(UiMapPoint.CreateFromCoordinates(playerWaypoint.uiMapID, playerWaypoint.position.x, playerWaypoint.position.y, playerWaypoint.z))
-        C_SuperTrack.SetSuperTrackedUserWaypoint(playerWaypointTracking)
-        playerWaypoint = nil
+    elseif OFA_playerWaypoint then
+        C_Map.SetUserWaypoint(UiMapPoint.CreateFromCoordinates(OFA_playerWaypoint.uiMapID, OFA_playerWaypoint.position.x, OFA_playerWaypoint.position.y, OFA_playerWaypoint.z))
+        C_SuperTrack.SetSuperTrackedUserWaypoint(OFA_playerWaypointTracking)
+        OFA_playerWaypoint = nil
     elseif waypoint then
         if waypoint.uiMapID == shadowlandsMapID and string.format("%.4f", waypoint.position.x) == string.format("%.4f", flightMasterX) and string.format("%.4f", waypoint.position.y) == string.format("%.4f", flightMasterY) then
             C_Map.ClearUserWaypoint()
