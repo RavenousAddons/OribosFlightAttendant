@@ -1,0 +1,13 @@
+<Ui>
+    <Script file="metadata.lua" />
+    <Script file="locales.lua" />
+    <Script file="functions.lua" />
+    <Script file="core.lua" />
+
+    <Frame name="oribosFlightAttendant">
+        <Scripts>
+            <OnLoad function="oribosFlightAttendant_OnLoad" />
+            <OnEvent function="oribosFlightAttendant_OnEvent" />
+        </Scripts>
+    </Frame>
+</Ui>
