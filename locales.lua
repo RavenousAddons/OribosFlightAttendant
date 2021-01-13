@@ -15,7 +15,7 @@ L.Version = "%s is the current version." -- oribosFlightAttendant.version
 L.OutOfDate = "There is an update available for |cff%s%s|r!" -- oribosFlightAttendant.color, oribosFlightAttendant.name
 L.Install = "Thanks for installing |cff%s%s|r!" -- oribosFlightAttendant.color, oribosFlightAttendant.name
 L.Update = "Thanks for updating to |cff%sv%s|r!" -- oribosFlightAttendant.color, oribosFlightAttendant.version
-L.Support1 = "This AddOn automatically creates a waypoint to the Flight Master when you're in the Ring of Transference."
+L.Support1 = "This AddOn automatically creates a waypoint to the Flight Master when you're in the Oribos Ring of Transference."
 L.Support2 = "Check out the AddOn on |rGitHub|cffffffff, |rWoWInterface|cffffffff, or |rCurse|cffffffff for more info and support!"
 L.Support3 = "You can also get help directly from the author on Discord: |r%s|cffffffff" -- oribosFlightAttendant.discord
 
