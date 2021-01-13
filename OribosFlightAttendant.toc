@@ -4,12 +4,12 @@
 ## Name: Oribos Flight Attendant
 ## Title: Oribos |cffff866bFlight Attendant|r
 ## Notes: "You look lost! Right this way to the Oribos Flight Master."
-## Author: waldenp0nd
+## Author: RavenousAddons
 
 ## SavedVariables: OFA_version, OFA_seenUpdate
 ## SavedVariablesPerCharacter: OFA_inGameNavigation, OFA_playerWaypoint, OFA_playerWaypointTracking
 
 ## X-License: Public Domain
-## X-Website: https://github.com/waldenp0nd/OribosFlightAttendant
+## X-Website: https://github.com/RavenousAddons/OribosFlightAttendant
 
 OribosFlightAttendant.xml
