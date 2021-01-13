@@ -12,7 +12,7 @@ end })
 -- Default (English)
 L.Saved = "Your %s has been saved." -- C_Map.GetUserWaypointHyperlink()
 L.Version = "%s is the current version." -- oribosFlightAttendant.version
-L.OutOfDate = "There is an update available for |cff%s%s|r! Please go to GitHub, WoWInterface, or Curse to download the latest version." -- oribosFlightAttendant.color, oribosFlightAttendant.name
+L.OutOfDate = "There is an update available for |cff%s%s|r!" -- oribosFlightAttendant.color, oribosFlightAttendant.name
 L.Install = "Thanks for installing |cff%s%s|r!" -- oribosFlightAttendant.color, oribosFlightAttendant.name
 L.Update = "Thanks for updating to |cff%sv%s|r!" -- oribosFlightAttendant.color, oribosFlightAttendant.version
 L.Support1 = "This AddOn automatically creates a waypoint to the Flight Master when you're in the Ring of Transference."
