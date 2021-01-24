@@ -11,5 +11,7 @@
 
 ## X-License: Public Domain
 ## X-Website: https://github.com/RavenousAddons/OribosFlightAttendant
+## X-Curse-Project-ID: 426841
+## X-WoWI-ID: 25812
 
 OribosFlightAttendant.xml
