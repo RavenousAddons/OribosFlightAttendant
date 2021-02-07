@@ -1,11 +1,8 @@
-local name, oribosFlightAttendant = ...
+local name, ns = ...
 
-oribosFlightAttendant.name = "Oribos Flight Attendant"
-oribosFlightAttendant.title = GetAddOnMetadata(name, "Title")
-oribosFlightAttendant.notes = GetAddOnMetadata(name, "Notes")
-oribosFlightAttendant.version = GetAddOnMetadata(name, "Version")
-oribosFlightAttendant.color = "ff866b"
-oribosFlightAttendant.github = "https://github.com/RavenousAddons/OribosFlightAttendant"
-oribosFlightAttendant.curseforge = "https://www.curseforge.com/wow/addons/oribos-flight-attendant"
-oribosFlightAttendant.wowinterface = "https://www.wowinterface.com/downloads/info25812-OribosFlightAttendant.html"
-oribosFlightAttendant.discord = "https://discord.gg/dNfqnRf2fq"
+ns.name = "Oribos Flight Attendant"
+ns.title = GetAddonMetadata(name, "Title")
+ns.notes = GetAddonMetadata(name, "Notes")
+ns.version = GetAddonMetadata(name, "Version")
+ns.color = "ff866b"
+ns.discord = "https://discord.gg/9XeTpbcjzu"

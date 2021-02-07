@@ -1,18 +1,18 @@
-local name, oribosFlightAttendant = ...
-local L = oribosFlightAttendant.L
+local name, ns = ...
+local L = ns.L
 
 OFA_playerWaypoint = OFA_playerWaypoint ~= nil and OFA_playerWaypoint or nil
 OFA_playerWaypointTracking = OFA_playerWaypointTracking ~= nil and OFA_playerWaypointTracking or false
 
-function oribosFlightAttendant:PrettyPrint(message, full)
+function ns:PrettyPrint(message, full)
     if full == false then
         message = message .. ":"
     end
-    local prefix = "|cff" .. oribosFlightAttendant.color .. oribosFlightAttendant.name .. (full and " " or ":|r ")
+    local prefix = "|cff" .. ns.color .. ns.name .. (full and " " or ":|r ")
     DEFAULT_CHAT_FRAME:AddMessage(prefix .. message)
 end
 
-function oribosFlightAttendant:SendVersion()
+function ns:SendVersion()
     local inInstance, _ = IsInInstance()
     if inInstance then
         C_ChatInfo.SendAddonMessage(name, OFA_version, "INSTANCE_CHAT")
@@ -28,7 +28,7 @@ function oribosFlightAttendant:SendVersion()
     end
 end
 
-function oribosFlightAttendant:Attendant()
+function ns:Attendant()
     local ringOfTransferenceMapID = 1671
     local shadowlandsMapID = 1550
     local flightMasterX = 0.4702
@@ -41,7 +41,7 @@ function oribosFlightAttendant:Attendant()
             else
                 OFA_playerWaypoint = waypoint
                 OFA_playerWaypointTracking = C_SuperTrack.IsSuperTrackingUserWaypoint()
-                oribosFlightAttendant:PrettyPrint(string.format(L.Saved, C_Map.GetUserWaypointHyperlink()))
+                ns:PrettyPrint(string.format(L.Saved, C_Map.GetUserWaypointHyperlink()))
             end
         end
         SetCVar("showInGameNavigation", 1)

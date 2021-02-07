@@ -1,9 +1,9 @@
 ## Interface: 90002
-## Version: 1.2.0
+## Version: 1.2.1
 
 ## Name: Oribos Flight Attendant
 ## Title: Oribos |cffff866bFlight Attendant|r
-## Notes: "You look lost! Right this way to the Oribos Flight Master."
+## Notes: You look lost! Right this way to the Oribos Flight Master.
 ## Author: RavenousAddons
 
 ## SavedVariables: OFA_version, OFA_seenUpdate
