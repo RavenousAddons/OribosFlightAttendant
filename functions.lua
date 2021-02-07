@@ -4,28 +4,8 @@ local L = ns.L
 OFA_playerWaypoint = OFA_playerWaypoint ~= nil and OFA_playerWaypoint or nil
 OFA_playerWaypointTracking = OFA_playerWaypointTracking ~= nil and OFA_playerWaypointTracking or false
 
-function ns:PrettyPrint(message, full)
-    if full == false then
-        message = message .. ":"
-    end
-    local prefix = "|cff" .. ns.color .. ns.name .. (full and " " or ":|r ")
-    DEFAULT_CHAT_FRAME:AddMessage(prefix .. message)
-end
-
-function ns:SendVersion()
-    local inInstance, _ = IsInInstance()
-    if inInstance then
-        C_ChatInfo.SendAddonMessage(name, OFA_version, "INSTANCE_CHAT")
-    elseif IsInGroup() then
-        if GetNumGroupMembers() > 5 then
-            C_ChatInfo.SendAddonMessage(name, OFA_version, "RAID")
-        end
-        C_ChatInfo.SendAddonMessage(name, OFA_version, "PARTY")
-    end
-    local guildName, _, _, _ = GetGuildInfo("player")
-    if guildName then
-        C_ChatInfo.SendAddonMessage(name, OFA_version, "GUILD")
-    end
+function ns:PrettyPrint(message)
+    DEFAULT_CHAT_FRAME:AddMessage("|cff" .. ns.color .. ns.name .. ":|r " .. message)
 end
 
 function ns:Attendant()
