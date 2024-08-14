@@ -1,12 +1,13 @@
-## Interface: 100002
-## Version: 1.2.3
+## Interface: 110002
+## Version: 1.2.4
 
 ## Name: Oribos Flight Attendant
 ## Title: Oribos |cffff866bFlight Attendant|r
 ## Notes: You look lost! Right this way to the Oribos Flight Master.
 ## Author: RavenousAddons
+## IconAtlas: FlightMaster
 
-## SavedVariables: OFA_version, OFA_seenUpdate
+## SavedVariables: OFA_version
 ## SavedVariablesPerCharacter: OFA_inGameNavigation, OFA_playerWaypoint, OFA_playerWaypointTracking
 
 ## X-License: Public Domain
