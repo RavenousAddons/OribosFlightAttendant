@@ -14,7 +14,6 @@ L.Saved = "Your %s has been saved." -- C_Map.GetUserWaypointHyperlink()
 L.Version = "%s is the current version." -- ns.version
 L.OutOfDate = "There is an update available for |cff%s%s|r!" -- ns.color, ns.name
 L.Install = "Thanks for installing |cff%s%s|r!" -- ns.color, ns.name
-L.Update = "Thanks for updating to |cff%sv%s|r!" -- ns.color, ns.version
 L.Support1 = "This Addon automatically creates a waypoint to the Flight Master when you're in the Oribos Ring of Transference."
 L.Support2 = "Check out the Addon on |rGitHub|cffffffff, |rWoWInterface|cffffffff, or |rCurse|cffffffff for more info and support!"
 
