@@ -1,11 +1,23 @@
-## Interface: 110002
-## Version: 1.2.4
+## Interface: 110100
+## Version: 1.2.5
 
 ## Name: Oribos Flight Attendant
 ## Title: Oribos |cffff866bFlight Attendant|r
 ## Notes: You look lost! Right this way to the Oribos Flight Master.
 ## Author: RavenousAddons
 ## IconAtlas: FlightMaster
+
+## Category-enUS: Expansion Features
+## Category-deDE: Erweiterungsfeatures
+## Category-esES: Características
+## Category-esMX: Características de expansiones
+## Category-frFR: Contenu d’extension
+## Category-itIT: Contenuti specifici
+## Category-koKR: 확장팩 특징
+## Category-ptBR: Características da Expansão
+## Category-ruRU: Особый контент
+## Category-zhCN: 特色更新
+## Category-zhTW: 資料片特色
 
 ## SavedVariables: OFA_version
 ## SavedVariablesPerCharacter: OFA_inGameNavigation, OFA_playerWaypoint, OFA_playerWaypointTracking
